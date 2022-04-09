@@ -5,7 +5,7 @@
 package com.mycompany.mavenproject1;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
+import java.util.Scanner;
 
 /**
  * Write an algorithm to find the sum of the prime numbers which have the digit 
@@ -16,40 +16,52 @@ import java.util.ListIterator;
  */
 public class Week08_Lab {
     
-    public static int findPrimes(int start, int end){
-        ArrayList<Integer> primes = new ArrayList<Integer>();
+    public static int findPrimes(int num){
+        
+        ArrayList<Integer> primeNumbers = new ArrayList<Integer>();
+        
         int count,sum =0;
-        for(int n = start; n <= end; n++){
-            boolean prime = true;
+        String str = "";
+        
+        for(int i = 0; i <= num; i++){      
+            boolean isPrime = true;
             count = 0;
             
-            for(int i=2; i<= n/2; i++){          
-                if(n %i == 0){
+            for(int j=2; j<= i/2; j++){           
+                if(i %j == 0){
                     count++;
-                    prime = false;
+                    isPrime = false;
                     break;
                 }                 
-             }
-            
-             if(prime){  
-                 primes.add(n);   
-             } 
-             if(count==0 && n!=1){
-                 sum = sum +n;
-             }
-        }
-        System.out.println(primes);
+             }          
+             if(isPrime){
+                 str = Integer.toString(i); // converts int to string
+                 
+                 if(str.contains("3")){     // checks if string contains 3 digit
+                    primeNumbers.add(i);    // adds the prime number containing 3 digit to an arraylist
+                    sum = sum +i;           // adds the prime numbers to int sum
+                 }      
+             }                         
+        }       
+        System.out.println("Prime numbers with '3' -> " + primeNumbers);
         return sum;
     }
 
     
     
     public static void main(String[] args){
-        int arr = findPrimes(1, 100);
-        
-        System.out.println(arr); 
-
        
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        
+        int num =scnr.nextInt();
+        
+        if(num < 1000000){
+           System.out.println("Sum of prime numbers: " + findPrimes(num)); 
+        }
+        else
+            System.out.println(num + " is too high");
+         
         }
     }
     
